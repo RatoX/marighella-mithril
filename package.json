@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "RatoX",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "navigo": "^3.0.0",
+    "webpack": "^1.13.2"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
 }
