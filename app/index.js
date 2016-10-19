@@ -1,3 +1,8 @@
 var nav = require('navigo');
 
-console.log(nav);
+
+var dummy = function(func){
+  console.log(func());
+};
+
+dummy(()=>{nav});
