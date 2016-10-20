@@ -1,25 +1,49 @@
-var path = require('path');
-var APP          = path.join(__dirname, 'src/'),
-    NODE_MODULES = path.join(__dirname, 'node_modules/');
+var path              = require('path');
+    webpack           = require('webpack'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 var config = {
-  entry: './app',
-  output: {
-    path: './dist',
-    filename: 'app.js'
+  entry: {
+    'script': './scripts/index.js',
+    'style': './styles/index.scss',
   },
-  resolve: {
-    root: [APP, NODE_MODULES]
-  },
+
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel']
-      }
-    ]
-  }
-}
+        exclude: /(node_modules|bower_components)\//,
+          loader: 'babel-loader'
+      },
+      {
+        test: /\.scss/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
+      },
+      {
+        test: /\.(jpg)$/,
+        loader: 'file?name=images/[name].[ext]'
+      },
+    ],
+  },
+
+  plugins: [
+    new ExtractTextPlugin('[name].css'),
+    new HtmlWebpackPlugin({
+      template: 'templates/index.html.ejs'
+    })
+  ],
+
+  resolve: {
+    root: path.join(__dirname, 'scripts'),
+    extensions: ['', '.js'],
+  },
+
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js',
+  },
+};
 
 module.exports = config;
