@@ -6,8 +6,9 @@ var path              = require('path');
 
 var config = {
   entry: {
-    'script': './scripts/index.js',
-    'style': './styles/index.scss',
+    script: './scripts/index.js',
+    style: './styles/index.scss',
+    vendor: ['mithril']
   },
 
   module: {
@@ -29,6 +30,8 @@ var config = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({ m: 'mithril' }),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js' }),
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: 'templates/index.html.ejs'
