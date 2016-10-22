@@ -7,15 +7,15 @@ function binds(data) {
 };
 
 var Login = {
-  model: {
-    login: '',
-    password: ''
-  },
   controller: function() {
     return {
+      model: {
+        login: '',
+        password: ''
+      },
       submit: function(param, one){
         let model = this.model
-        debugger
+        m.route('/noticias')
       }
     }
   },
@@ -23,11 +23,11 @@ var Login = {
     return m('section.login', [
       m('h1','Mithril Test'),
       m('figure'),
-      m('form', binds(this.model), [
+      m('section', binds(controller.model), [
         m('label[for=login]', 'Login'),
-        m('input[name=login][type=text]', {value: this.model.login}),
+        m('input[name=login][type=text]', {value: controller.model.login}),
         m('label[for=password]', 'Password'),
-        m('input[name=password][type=password]', {value: this.model.password}),
+        m('input[name=password][type=password]', {value: controller.model.password}),
         m("button", {onclick: controller.submit.bind(this)})
       ])
     ]);
